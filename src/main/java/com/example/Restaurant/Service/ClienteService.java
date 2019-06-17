@@ -11,7 +11,7 @@ public interface ClienteService {
 
     ClienteDto save(ClienteDto clienteDto);
 
-    Page<ClienteDto> getAll(Pageable pageable, String nome, String sortBy, String direction);
+    Page<ClienteDto> getAll(Pageable pageable, String nome, String sortProperty, String direction);
 
     ClienteDto update(ClienteDto clienteDto);
 

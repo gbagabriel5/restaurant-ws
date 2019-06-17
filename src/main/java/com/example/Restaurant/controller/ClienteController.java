@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,14 @@ public class ClienteController {
     @GetMapping
     @ApiOperation("Listagem de todos os clientes")
     public ResponseEntity<Page<ClienteDto>> findAll(
-            @RequestParam(value = "pag", defaultValue = "0") int pag,
+            @RequestParam(value = "pag", defaultValue = "0") int page,
             @RequestParam(value = "qtd", defaultValue = "10") int qtd,
-            @RequestParam(name = "sortProperty", defaultValue = "clinome") String sortProperty,
+            @RequestParam(name = "orderby", defaultValue = "clinome") String orderBy,
             @RequestParam(name = "direction", defaultValue = "ASC") String direction,
             @RequestParam(value = "name", defaultValue = "") String nome
     ) {
-        PageRequest pageRequest = PageRequest.of(pag, qtd, Sort.Direction.valueOf("ASC"), "id");
-        return new ResponseEntity<>(clienteService.getAll(pageRequest, nome, sortProperty, direction), HttpStatus.OK);
+        Pageable pageable = PageRequest.of(page, qtd, Sort.by(orderBy));
+        return new ResponseEntity<>(clienteService.getAll(pageable, nome, orderBy, direction), HttpStatus.OK);
     }
 
     @PutMapping

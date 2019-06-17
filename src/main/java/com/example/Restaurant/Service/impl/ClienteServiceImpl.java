@@ -43,15 +43,15 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Page<ClienteDto> getAll(Pageable pageable, String name, String sortBy, String direction) {
+    public Page<ClienteDto> getAll(Pageable pageable, String name, String sortProperty, String direction) {
         FilterManager<Cliente> filterManager = new FilterManager<>(clienteFilter);
 
         filterManager.addParameter("clinome", "%" + name + "%");
 
         if(direction.equals("ASC")){
-            filterManager.orderBy(sortBy).asc();
+            filterManager.orderBy(sortProperty).asc();
         }else {
-            filterManager.orderBy(sortBy).desc();
+            filterManager.orderBy(sortProperty).desc();
         }
 
         List<Cliente> clients = filterManager.findByFilter();
