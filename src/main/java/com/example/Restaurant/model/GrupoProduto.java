@@ -22,9 +22,6 @@ public class GrupoProduto {
 
     private String grpdesc;
 
-//    @OneToMany(mappedBy = "grupoProduto", fetch = FetchType.LAZY)
-//    private List<GrupoProduto> grupoProdutos;
-
     public GrupoProduto(GrupoProdutoDto grupoProdutoDto){
         this.grpcod = grupoProdutoDto.getGrpcod();
         this.grpdesc = grupoProdutoDto.getGrpdesc();
