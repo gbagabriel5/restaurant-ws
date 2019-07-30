@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface FornecedorRepository extends JpaRepository<Fornecedor, Long>{
-    @Query("SELECT f FROM Fornecedor f WHERE f.forcod = :pId")
+    @Query("SELECT f FROM Fornecedor f WHERE f.cod = :pId")
     Optional<Fornecedor> findById(@Param("pId") Integer id);
 }

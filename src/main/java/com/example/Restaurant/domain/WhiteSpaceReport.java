@@ -69,5 +69,4 @@ public class WhiteSpaceReport {
             return this.whiteSpaceReport;
         }
     }
-
 }

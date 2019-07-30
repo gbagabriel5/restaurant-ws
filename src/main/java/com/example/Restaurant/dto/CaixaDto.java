@@ -1,23 +1,15 @@
 package com.example.Restaurant.dto;
 
 import com.example.Restaurant.model.Caixa;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CaixaDto {
-    @Id
-    private Integer cxcod;
+    private Integer cod;
 
     private String cxdthabre;
 
@@ -32,7 +24,7 @@ public class CaixaDto {
     private String cxstatus;
 
     public CaixaDto(Caixa caixa){
-        this.cxcod= caixa.getCxcod();
+        this.cod= caixa.getCod();
         this.cxdthabre = caixa.getCxdthabre();
         this.cxdthfecha = caixa.getCxdthfecha();
         this.cxsinicial = caixa.getCxsinicial();
@@ -40,6 +32,5 @@ public class CaixaDto {
         this.cxobs = caixa.getCxobs();
         this.cxstatus = caixa.getCxstatus();
     }
-
     public Caixa toModel(){return new Caixa(this);}
 }

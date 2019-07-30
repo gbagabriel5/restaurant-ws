@@ -1,23 +1,21 @@
 package com.example.Restaurant.model;
 
 import com.example.Restaurant.dto.CaixaDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
+import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "caixa")
 public class Caixa {
     @Id
-    private Integer cxcod;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cxcod", nullable = false)
+    private Integer cod;
 
     private String cxdthabre;
 
@@ -32,7 +30,7 @@ public class Caixa {
     private String cxstatus;
 
     public Caixa(CaixaDto caixaDto) {
-        this.cxcod = caixaDto.getCxcod();
+        this.cod = caixaDto.getCod();
         this.cxdthabre = caixaDto.getCxdthabre();
         this.cxdthfecha = caixaDto.getCxdthfecha();
         this.cxsinicial = caixaDto.getCxsinicial();
@@ -44,5 +42,4 @@ public class Caixa {
     public CaixaDto toDto() {
         return new CaixaDto(this);
     }
-
 }

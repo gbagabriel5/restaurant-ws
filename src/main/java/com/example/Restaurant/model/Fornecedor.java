@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @AllArgsConstructor
@@ -18,7 +17,8 @@ public class Fornecedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer forcod;
+    @Column(name = "forcod", nullable = false)
+    private Integer cod;
 
     private String fornome;
 
@@ -30,10 +30,8 @@ public class Fornecedor {
 
     private String forfone;
 
-
-
     public Fornecedor(FornecedorDto fornecedorDto) {
-        this.forcod = fornecedorDto.getForcod();
+        this.cod = fornecedorDto.getCod();
         this.fornome = fornecedorDto.getFornome();
         this.forcnpj = fornecedorDto.getForcnpj();
         this.forcep = fornecedorDto.getForcep();

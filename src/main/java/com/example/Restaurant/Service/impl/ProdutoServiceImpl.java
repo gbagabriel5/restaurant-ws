@@ -72,7 +72,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public ProdutoDto update(ProdutoDto produtoDto) {
-        Assert.notNull(produtoDto.getProcod(), "id.not.informed");
+        Assert.notNull(produtoDto.getCod(), "id.not.informed");
         return save(produtoDto);
     }
 

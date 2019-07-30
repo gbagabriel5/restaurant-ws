@@ -4,7 +4,7 @@ import com.example.Restaurant.Service.GenericFilter;
 import com.example.Restaurant.domain.FilterManagerAbstract;
 import com.example.Restaurant.domain.FilterManagerOrder;
 import com.example.Restaurant.enums.InstructionStatusEnum;
-import com.example.Restaurant.util.Utils;
+import com.example.Restaurant.utils.FilterUtils;
 
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.ParameterExpression;
@@ -49,7 +49,7 @@ class FilterManager<T> extends FilterManagerAbstract {
 
     void addParameter(String field, String value){
 
-        if(!Utils.removeLikeCharacter(value).equals("")){
+        if(!FilterUtils.removeLikeCharacter(value).equals("")){
             ParameterExpression<String> parameter = classFilter.getCriteriaBuilder().parameter(String.class);
             Predicate predicate;
             if(value.charAt(0) == '%' || value.charAt(value.length()-1) == '%'){

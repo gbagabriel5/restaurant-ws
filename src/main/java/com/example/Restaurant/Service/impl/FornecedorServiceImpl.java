@@ -65,7 +65,7 @@ public class FornecedorServiceImpl implements FornecedorService {
 
     @Override
     public FornecedorDto update(FornecedorDto fornecedorDto) {
-        Assert.notNull(fornecedorDto.getForcod(), "id.not.informed");
+        Assert.notNull(fornecedorDto.getCod(), "id.not.informed");
         return save(fornecedorDto);
     }
 

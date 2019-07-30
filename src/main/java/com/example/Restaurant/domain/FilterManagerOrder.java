@@ -9,12 +9,10 @@ public final class FilterManagerOrder extends FilterManagerAbstract {
         orders = filterManagerAbstract.orders;
         path = filterManagerAbstract.path;
     }
-
     public void asc(){
         orders.add(classFilter.getCriteriaBuilder().asc(this.path));
     }
     public void desc(){
         orders.add(classFilter.getCriteriaBuilder().desc(this.path));
     }
-
 }

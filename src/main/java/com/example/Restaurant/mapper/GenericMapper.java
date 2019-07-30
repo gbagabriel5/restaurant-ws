@@ -1,6 +1,6 @@
 package com.example.Restaurant.mapper;
 
-import com.example.Restaurant.model.BaseEntity;
+import com.example.Restaurant.domain.BaseEntity;
 import org.springframework.data.domain.Page;
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,5 +33,4 @@ public interface GenericMapper<E extends BaseEntity, D> {
     default Page<D> convertToSliceDTO(Page<E> page) {
         return page.map(this::convertToDTO);
     }
-
 }

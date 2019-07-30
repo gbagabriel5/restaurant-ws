@@ -18,12 +18,13 @@ import java.util.List;
 public class GrupoProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer grpcod;
+    @Column(name = "grpcod", nullable = false)
+    private Integer cod;
 
     private String grpdesc;
 
     public GrupoProduto(GrupoProdutoDto grupoProdutoDto){
-        this.grpcod = grupoProdutoDto.getGrpcod();
+        this.cod = grupoProdutoDto.getCod();
         this.grpdesc = grupoProdutoDto.getGrpdesc();
     }
 

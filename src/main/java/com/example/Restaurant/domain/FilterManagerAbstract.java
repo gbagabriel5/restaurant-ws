@@ -1,7 +1,6 @@
 package com.example.Restaurant.domain;
 
 import com.example.Restaurant.Service.GenericFilter;
-
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Path;

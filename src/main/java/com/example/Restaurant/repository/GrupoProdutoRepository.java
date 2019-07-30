@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface GrupoProdutoRepository extends JpaRepository<GrupoProduto, Integer> {
-    @Query("SELECT gp FROM GrupoProduto gp WHERE gp.grpcod = :pId")
+    @Query("SELECT gp FROM GrupoProduto gp WHERE gp.cod = :pId")
     Optional<GrupoProduto> findById(@Param("pId") Integer id);
 }

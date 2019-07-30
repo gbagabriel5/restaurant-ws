@@ -1,22 +1,21 @@
 package com.example.Restaurant.model;
 
 import com.example.Restaurant.dto.ProdutoDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "produto")
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer procod;
+    @Column(name = "procod", nullable = false)
+    private Integer cod;
 
     private String pronome;
 
@@ -30,16 +29,16 @@ public class Produto {
 
     private String prostatus;
 
-    @ManyToOne()
     @JoinColumn(name = "progrpcod")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private GrupoProduto grupoProduto;
 
-    @ManyToOne()
     @JoinColumn(name = "proforcod")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Fornecedor fornecedor;
 
     public Produto(ProdutoDto produtoDto){
-        this.procod = produtoDto.getProcod();
+        this.cod = produtoDto.getCod();
         this.pronome = produtoDto.getPronome();
         this.propreco = produtoDto.getPropreco();
         this.procusto = produtoDto.getProcusto();

@@ -2,7 +2,6 @@ package com.example.Restaurant.Service.impl;
 
 import com.example.Restaurant.Service.Filter;
 import com.example.Restaurant.Service.GenericFilter;
-import com.example.Restaurant.model.Cliente;
 import com.example.Restaurant.model.Produto;
 import org.springframework.stereotype.Service;
 

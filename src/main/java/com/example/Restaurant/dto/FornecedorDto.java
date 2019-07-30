@@ -1,22 +1,16 @@
 package com.example.Restaurant.dto;
 
 import com.example.Restaurant.model.Fornecedor;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.*;
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FornecedorDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer forcod;
+    private Integer cod;
 
     private String fornome;
 
@@ -29,7 +23,7 @@ public class FornecedorDto {
     private String forfone;
 
     public FornecedorDto (Fornecedor fornecedor){
-        this.forcod = fornecedor.getForcod();
+        this.cod = fornecedor.getCod();
         this.fornome = fornecedor.getFornome();
         this.forcnpj = fornecedor.getForcnpj();
         this.forcep = fornecedor.getForcep();

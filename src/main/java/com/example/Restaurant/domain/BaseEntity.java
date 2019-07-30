@@ -1,4 +1,4 @@
-package com.example.Restaurant.model;
+package com.example.Restaurant.domain;
 
 import java.io.Serializable;
 

@@ -66,7 +66,7 @@ public class GrupoProdutoServiceImpl implements GrupoProdutoService {
 
     @Override
     public GrupoProdutoDto update(GrupoProdutoDto grupoProdutoDto) {
-        Assert.notNull(grupoProdutoDto.getGrpcod(), "id.not.informed");
+        Assert.notNull(grupoProdutoDto.getCod(), "id.not.informed");
         return save(grupoProdutoDto);
     }
 
