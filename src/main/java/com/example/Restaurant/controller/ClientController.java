@@ -42,9 +42,8 @@ public class ClientController implements ListRest<Client, ClientDto, Integer> {
 
     @PostMapping
     @ApiOperation(value = "Create new Client")
-    public ClientDto create(@ApiParam(value = "name", required = true) @RequestBody @Valid ClientDto clientDto) {
+    public ClientDto create(@ApiParam(value = "Client", required = true) @RequestBody @Valid ClientDto clientDto) {
         Client entity = clientMapper.convertToEntity(clientDto);
-
         return clientMapper.convertToDTO(clientService.add(entity));
     }
 
