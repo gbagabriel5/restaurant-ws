@@ -9,6 +9,7 @@ import com.example.Restaurant.mapper.SaleMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @RequestMapping(value = "/sale")
 public class SaleController implements ListRest<Sale, SaleDto, Integer> {
 
+    @Autowired
     private final SaleService saleService;
 
     private final SaleMapper saleMapper = new SaleMapper();
@@ -37,7 +39,7 @@ public class SaleController implements ListRest<Sale, SaleDto, Integer> {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Find Sale by id")
-    public SaleDto findById(@ApiParam(value = "id", required = true) @PathVariable Integer id) {
+    public SaleDto findById(@PathVariable Integer id) {
         return saleMapper.convertToDTO(saleService.get(id));
     }
 
@@ -57,7 +59,7 @@ public class SaleController implements ListRest<Sale, SaleDto, Integer> {
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Delete Sale")
-    public void delete(@ApiParam(value = "id", required = true) @PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) {
         saleService.removeById(id);
     }
 }

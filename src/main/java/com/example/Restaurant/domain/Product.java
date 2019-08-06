@@ -25,7 +25,10 @@ public class Product implements BaseEntity<Integer>{
     @Column(name = "procusto")
     private Double cost;
 
-    @Column(name = "proestoque")
+    @Column(name = "prounmed")
+    private String unit;
+
+    @Column(name = "proest")
     private Integer quantity;
 
     @Column(name = "proestm")
@@ -34,11 +37,7 @@ public class Product implements BaseEntity<Integer>{
     @Column(name = "prostatus")
     private String status;
 
-    @JoinColumn(name = "progrpcod")
+    @JoinColumn(name = "proctpcod")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ProductGroup productGroup;
-
-    @JoinColumn(name = "proforcod")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Provider provider;
+    private ProductCategory  productCategory;
 }

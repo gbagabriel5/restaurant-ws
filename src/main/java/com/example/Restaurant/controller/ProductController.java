@@ -9,6 +9,7 @@ import com.example.Restaurant.mapper.ProductMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 @RequestMapping(value = "/product")
 public class ProductController implements ListRest<Product, ProductDto, Integer> {
 
+    @Autowired
     private final ProductService productService;
     private final ProductMapper productMapper = new ProductMapper();
 
@@ -37,7 +39,7 @@ public class ProductController implements ListRest<Product, ProductDto, Integer>
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Find Product by id")
-    public ProductDto findById(@ApiParam(value = "id", required = true) @PathVariable Integer id) {
+    public ProductDto findById(@PathVariable Integer id) {
         return productMapper.convertToDTO(productService.get(id));
     }
 
@@ -57,7 +59,7 @@ public class ProductController implements ListRest<Product, ProductDto, Integer>
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Delete Product")
-    public void delete(@ApiParam(value = "id", required = true) @PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) {
         productService.removeById(id);
     }
 }

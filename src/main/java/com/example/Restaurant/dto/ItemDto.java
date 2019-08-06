@@ -7,14 +7,16 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto extends BaseDto{
+public class ItemDto extends BaseDto{
     private Integer id;
     private String name;
     private Double price;
     private Double cost;
     private String unit;
-    private Integer quantity;
-    private Integer minQuantity;
+    private Double quantity;
+    private Double minQuantity;
+    private Integer shelfLife;
     private String status;
-    private ProductCategoryDto productCategoryDto;
+    private ProviderDto providerDto;
+    private ItemCategoryDto itemCategoryDto;
 }

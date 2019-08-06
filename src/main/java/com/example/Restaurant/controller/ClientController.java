@@ -9,6 +9,7 @@ import com.example.Restaurant.mapper.GenericMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @RequestMapping(value = "/client")
 public class ClientController implements ListRest<Client, ClientDto, Integer> {
 
+    @Autowired
     private final ClientService clientService;
     private final ClientMapper clientMapper = new ClientMapper();
 
@@ -36,7 +38,7 @@ public class ClientController implements ListRest<Client, ClientDto, Integer> {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "Find Client by id")
-    public ClientDto findById(@ApiParam(value = "id", required = true) @PathVariable Integer id) {
+    public ClientDto findById(@PathVariable Integer id) {
         return clientMapper.convertToDTO(clientService.get(id));
     }
 
@@ -56,7 +58,7 @@ public class ClientController implements ListRest<Client, ClientDto, Integer> {
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Delete Client")
-    public void delete(@ApiParam(value = "id", required = true) @PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) {
         clientService.removeById(id);
     }
 }

@@ -9,14 +9,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "grupoproduto")
-public class ProductGroup implements BaseEntity<Integer>{
+@Table(name = "categoriaproduto")
+public class ProductCategory implements BaseEntity<Integer>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "grpcod", nullable = false)
+    @Column(name = "ctpcod", nullable = false)
     private Integer id;
 
-    @Column(name = "grpdesc")
+    @Column(name = "ctpdesc")
     private String description;
 }

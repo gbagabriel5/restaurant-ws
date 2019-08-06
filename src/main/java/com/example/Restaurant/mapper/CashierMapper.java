@@ -9,8 +9,10 @@ public class CashierMapper implements GenericMapper<Cashier, CashierDto> {
     public CashierDto convertToDTO(Cashier entity) {
         CashierDto dto = new CashierDto();
         dto.setId(entity.getId());
+        dto.setDate(entity.getDate());
         dto.setOpenDate(entity.getOpenDate());
         dto.setClosureDate(entity.getClosureDate());
+        dto.setDescription(entity.getDescription());
         dto.setStartDate(entity.getStartDate());
         dto.setEndDate(entity.getEndDate());
         dto.setObs(entity.getObs());
@@ -22,8 +24,10 @@ public class CashierMapper implements GenericMapper<Cashier, CashierDto> {
     public Cashier convertToEntity(CashierDto dto) {
         Cashier entity = new Cashier();
         entity.setId(dto.getId());
+        entity.setDate(dto.getDate());
         entity.setOpenDate(dto.getOpenDate());
         entity.setClosureDate(dto.getClosureDate());
+        entity.setDescription(dto.getDescription());
         entity.setStartDate(dto.getStartDate());
         entity.setEndDate(dto.getEndDate());
         entity.setObs(dto.getObs());

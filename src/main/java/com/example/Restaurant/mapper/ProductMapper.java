@@ -1,6 +1,7 @@
 package com.example.Restaurant.mapper;
 
 import com.example.Restaurant.domain.Product;
+import com.example.Restaurant.dto.ProductCategoryDto;
 import com.example.Restaurant.dto.ProductDto;
 
 public class ProductMapper implements GenericMapper<Product, ProductDto> {
@@ -13,14 +14,12 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
         dto.setName(entity.getName());
         dto.setPrice(entity.getPrice());
         dto.setCost(entity.getCost());
+        dto.setUnit(entity.getUnit());
         dto.setQuantity(entity.getQuantity());
         dto.setMinQuantity(entity.getMinQuantity());
         dto.setStatus(entity.getStatus());
-        if (entity.getProductGroup() != null) {
-            dto.setProductGroupDto(new ProductGroupMapper().convertToDTO(entity.getProductGroup()));
-        }
-        if (entity.getProvider() != null) {
-            dto.setProviderDto(new ProviderMapper().convertToDTO(entity.getProvider()));
+        if (entity.getProductCategory() != null) {
+            dto.setProductCategoryDto(new ProductCategoryMapper().convertToDTO(entity.getProductCategory()));
         }
         return dto;
     }
@@ -33,14 +32,12 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
         entity.setCost(dto.getCost());
+        entity.setUnit(dto.getUnit());
         entity.setQuantity(dto.getQuantity());
         entity.setMinQuantity(dto.getMinQuantity());
         entity.setStatus(dto.getStatus());
-        if (dto.getProductGroupDto() != null) {
-            entity.setProductGroup(new ProductGroupMapper().convertToEntity(dto.getProductGroupDto()));
-        }
-        if (dto.getProviderDto() != null) {
-            entity.setProvider(new ProviderMapper().convertToEntity(dto.getProviderDto()));
+        if (dto.getProductCategoryDto() != null) {
+            entity.setProductCategory(new ProductCategoryMapper().convertToEntity(dto.getProductCategoryDto()));
         }
         return entity;
     }
