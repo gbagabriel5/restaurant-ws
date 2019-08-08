@@ -2,6 +2,8 @@ package com.example.Restaurant.domain;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -40,4 +42,7 @@ public class Product implements BaseEntity<Integer>{
     @JoinColumn(name = "proctpcod")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ProductCategory  productCategory;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductItem>  productItems = new HashSet<>(0);
 }

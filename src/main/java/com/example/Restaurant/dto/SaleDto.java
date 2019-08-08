@@ -2,6 +2,8 @@ package com.example.Restaurant.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -21,4 +23,5 @@ public class SaleDto extends BaseDto {
     private String tableStatus;
     private Double out;
     private String description;
+    private List<ItemSaleDto> itemSale;
 }

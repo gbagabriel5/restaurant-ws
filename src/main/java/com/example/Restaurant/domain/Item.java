@@ -40,7 +40,7 @@ public class Item implements BaseEntity<Integer>{
     @Column(name = "itstatus")
     private String status;
 
-    @JoinColumn(name = "proforcod")
+    @JoinColumn(name = "itforcod")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Provider provider;
 

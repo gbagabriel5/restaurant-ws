@@ -1,6 +1,7 @@
 package com.example.Restaurant.dto;
 
 import lombok.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +18,5 @@ public class ProductDto extends BaseDto{
     private Integer minQuantity;
     private String status;
     private ProductCategoryDto productCategoryDto;
+    private List<ProductItemDto> productItem;
 }
