@@ -38,6 +38,7 @@ public class ItemMapper implements GenericMapper<Item, ItemDto> {
         entity.setUnit(dto.getUnit());
         entity.setQuantity(dto.getQuantity());
         entity.setMinQuantity(dto.getMinQuantity());
+        entity.setShelfLife(dto.getShelfLife());
         entity.setStatus(dto.getStatus());
         if(dto.getProviderDto() !=null) {
             entity.setProvider(new ProviderMapper().convertToEntity(dto.getProviderDto()));
