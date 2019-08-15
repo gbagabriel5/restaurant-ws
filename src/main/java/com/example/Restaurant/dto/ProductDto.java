@@ -1,7 +1,9 @@
 package com.example.Restaurant.dto;
 
 import lombok.*;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,10 +15,10 @@ public class ProductDto extends BaseDto{
     private String name;
     private Double price;
     private Double cost;
-    private String unit;
     private Integer quantity;
     private Integer minQuantity;
     private String status;
+    private String control;
     private ProductCategoryDto productCategoryDto;
-    private List<ProductItemDto> productItem;
+    private Set<ProductItemDto> productItemDtos = new HashSet<>();
 }

@@ -10,6 +10,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +39,17 @@ public class ProductController implements ListRest<Product, ProductDto, Integer>
     @Override
     public GenericService<Product, Integer> getService() {
         return productService;
+    }
+
+    @GetMapping("/getByName")
+    @ApiOperation(value = "Find Item by name")
+    public Page<ProductDto> findByName(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                    @RequestParam(name = "count", defaultValue = "25") Integer count,
+                                    @RequestParam(name = "orderby", defaultValue = "name") String orderBy,
+                                    @RequestParam(name = "direction", defaultValue = "ASC") String direction,
+                                    @RequestParam(value = "name", defaultValue = "") String name) {
+        Pageable pageable = PageRequest.of(page, count, Sort.by(orderBy));
+        return productService.getByName(pageable, name, orderBy, direction);
     }
 
     @GetMapping(value = "/{id}")

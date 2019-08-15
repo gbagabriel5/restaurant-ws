@@ -27,9 +27,6 @@ public class Product implements BaseEntity<Integer>{
     @Column(name = "procusto")
     private Double cost;
 
-    @Column(name = "prounmed")
-    private String unit;
-
     @Column(name = "proest")
     private Integer quantity;
 
@@ -39,10 +36,13 @@ public class Product implements BaseEntity<Integer>{
     @Column(name = "prostatus")
     private String status;
 
+    @Column(name = "procts")
+    private String control;
+
     @JoinColumn(name = "proctpcod")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ProductCategory  productCategory;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductItem>  productItems = new HashSet<>(0);
 }

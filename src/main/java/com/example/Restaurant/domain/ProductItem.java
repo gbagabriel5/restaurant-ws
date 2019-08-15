@@ -17,12 +17,10 @@ public class ProductItem implements BaseEntity<Integer> {
     @Column(name = "itpcod", unique = true, nullable = false)
     private Integer id;
 
-    @Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "itpprocod", nullable = false)
     private Product product;
 
-    @Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "itpitcod", nullable = false)
     private Item item;
