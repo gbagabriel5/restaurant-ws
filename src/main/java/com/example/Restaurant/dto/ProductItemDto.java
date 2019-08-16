@@ -7,9 +7,11 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class ProductItemDto extends BaseDto {
+
     private Integer id;
+
     private ProductDto productDto;
+
     private ItemDto itemDto;
 }

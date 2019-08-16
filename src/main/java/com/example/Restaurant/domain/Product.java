@@ -43,6 +43,6 @@ public class Product implements BaseEntity<Integer>{
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ProductCategory  productCategory;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductItem>  productItems = new HashSet<>(0);
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductItem>  itemproduto = new HashSet<>(0);
 }

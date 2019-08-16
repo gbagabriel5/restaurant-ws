@@ -43,8 +43,8 @@ public class TablesController implements ListRest<Tables, TablesDto, Integer> {
     }
 
     @PostMapping
-    @ApiOperation(value = "Create new Provider")
-    public TablesDto create(@ApiParam(value = "Provider", required = true) @RequestBody @Valid TablesDto tablesDto) {
+    @ApiOperation(value = "Create new Table")
+    public TablesDto create(@ApiParam(value = "Table", required = true) @RequestBody @Valid TablesDto tablesDto) {
         Tables entity = tableMapper.convertToEntity(tablesDto);
         return tableMapper.convertToDTO(tablesService.add(entity));
     }

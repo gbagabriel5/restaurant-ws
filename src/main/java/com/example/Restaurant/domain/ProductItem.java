@@ -14,14 +14,14 @@ public class ProductItem implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "itpcod", unique = true, nullable = false)
+    @Column(name = "itpcod", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "itpprocod", nullable = false)
+    @JoinColumn(name = "itpprocod")
     private Product product;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "itpitcod", nullable = false)
+    @JoinColumn(name = "itpitcod")
     private Item item;
 }

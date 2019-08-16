@@ -30,7 +30,7 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
     }
 
     private void saveItens(Product entity, Product productsave){
-        for (ProductItem productItem: entity.getProductItems()) {
+        for (ProductItem productItem: entity.getItemproduto()) {
             if(productsave.getControl().equals("Sim") && productsave.getQuantity()>=productsave.getMinQuantity())
                 productsave.setStatus("OK");
             else
@@ -47,11 +47,11 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
         try {
             Product productsave =super.add(entity);
             saveItens(entity, productsave);
-            product=productsave;
+            entity=productsave;
         } catch (Exception ex) {
             new Exception("Não foi possivel salvar o item"+ex);
         }
-        return product;
+        return entity;
     }
 
     @Override

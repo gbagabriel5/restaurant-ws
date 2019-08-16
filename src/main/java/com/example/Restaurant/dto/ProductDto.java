@@ -1,13 +1,11 @@
 package com.example.Restaurant.dto;
 
 import lombok.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto extends BaseDto{

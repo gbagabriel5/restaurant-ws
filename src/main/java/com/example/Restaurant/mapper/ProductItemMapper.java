@@ -9,12 +9,8 @@ public final class ProductItemMapper implements GenericMapper<ProductItem, Produ
     public ProductItemDto convertToDTO(ProductItem entity) {
         ProductItemDto dto = new ProductItemDto();
         dto.setId(entity.getId());
-        if (dto.getProductDto() != null) {
-            entity.setProduct(new ProductMapper().convertToEntity(dto.getProductDto()));
-        }
-        if (dto.getItemDto() != null) {
-            entity.setItem(new ItemMapper().convertToEntity(dto.getItemDto()));
-        }
+        if(entity.getItem() !=null)
+        dto.setItemDto(new ItemMapper().convertToDTO(entity.getItem()));
         return dto;
     }
 
