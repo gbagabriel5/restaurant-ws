@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "itemproduto")
-public class ProductItem implements BaseEntity<Integer> {
+public class ProductItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +24,7 @@ public class ProductItem implements BaseEntity<Integer> {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "itpitcod")
     private Item item;
+
+    @Column(name = "itqtde")
+    private Double qtde;
 }

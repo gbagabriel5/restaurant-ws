@@ -2,12 +2,15 @@ package com.example.Restaurant.mapper;
 
 import com.example.Restaurant.domain.Product;
 import com.example.Restaurant.domain.ProductItem;
+import com.example.Restaurant.dto.CustomDto.ProductCustomDto;
+import com.example.Restaurant.dto.ItemDto;
 import com.example.Restaurant.dto.ProductDto;
 import com.example.Restaurant.dto.ProductItemDto;
+import org.modelmapper.ModelMapper;
 
 public class ProductMapper implements GenericMapper<Product, ProductDto> {
 
-    private ProductItemMapper productItemMapper = new ProductItemMapper();
+    ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public ProductDto convertToDTO(Product entity) {
@@ -28,7 +31,21 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
 
         if(!entity.getItemproduto().isEmpty()){
             entity.getItemproduto().forEach(productItem -> {
-                dto.getProductItemDtos().add( productItemMapper.convertToDTO(productItem));
+                ProductItemDto productItemDto = new ProductItemDto();
+
+                productItemDto.setId(productItem.getId());
+
+                ProductDto pdto = new ProductDto();
+                pdto.setId(productItem.getProduct().getId());
+                productItemDto.setProductDto(modelMapper.map(productItem.getProduct(), ProductCustomDto.class));
+
+                ItemDto itemDto = new ItemDto();
+                itemDto.setId(productItem.getItem().getId());
+                productItemDto.setItemDto(modelMapper.map(productItem.getItem(), ItemDto.class));
+
+                productItemDto.setQtde(productItem.getQtde());
+
+                dto.getProductItemDtos().add(productItemDto);
             });
         }
         return dto;
@@ -52,7 +69,7 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
 
         if(!dto.getProductItemDtos().isEmpty()){
             dto.getProductItemDtos().forEach(productItemDto -> {
-                entity.getItemproduto().add( converterProdutoItemEntity(productItemDto));
+                entity.getItemproduto().add(converterProdutoItemEntity(productItemDto));
             });
         }
         return entity;
@@ -61,28 +78,12 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
     private ProductItem converterProdutoItemEntity(ProductItemDto productItemDto) {
         ProductItem entity = new ProductItem();
         entity.setId(productItemDto.getId());
-        if (productItemDto.getProductDto() != null) {
-            entity.setProduct(new ProductMapper().convertToEntity(productItemDto.getProductDto()));
-        }
+        entity.setProduct(modelMapper.map(productItemDto.getProductDto(), Product.class));
         if (productItemDto.getItemDto() != null) {
             entity.setItem(new ItemMapper().convertToEntity(productItemDto.getItemDto()));
         }
+        entity.setQtde(productItemDto.getQtde());
         return entity;
-
-    }
-
-    private ProductItemDto converterProdutoItemDto(ProductItem entity) {
-        ProductItemDto dto = new ProductItemDto();
-
-        dto.setId(entity.getId());
-
-        if (entity.getProduct() != null) {
-            dto.setProductDto(new ProductMapper().convertToDTO(entity.getProduct()));
-        }
-        if (entity.getItem() != null) {
-            dto.setItemDto(new ItemMapper().convertToDTO(entity.getItem()));
-        }
-        return dto;
 
     }
 }

@@ -45,4 +45,8 @@ public class Product implements BaseEntity<Integer>{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product",cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductItem>  itemproduto = new HashSet<>(0);
+
+    public Product(Integer idProduct){
+        this.id = idProduct;
+    }
 }

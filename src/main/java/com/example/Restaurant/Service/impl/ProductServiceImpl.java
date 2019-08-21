@@ -33,17 +33,19 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
         for (ProductItem productItem: entity.getItemproduto()) {
             if(productsave.getControl().equals("Sim") && productsave.getQuantity()>=productsave.getMinQuantity())
                 productsave.setStatus("OK");
+            else if(productsave.getControl().equals("Sim") && productsave.getQuantity()<productsave.getMinQuantity())
+                productsave.setStatus("Baixo");
             else
                 productsave.setStatus("Sem Controle");
             productItem.setProduct(productsave);
             productItem.setItem(productItem.getItem());
+            productItem.setQtde(productItem.getQtde());
             productItemRepository.save(productItem);
         }
     }
 
     @Override
     public Product add(Product entity) {
-        Product product=null;
         try {
             Product productsave =super.add(entity);
             saveItens(entity, productsave);
