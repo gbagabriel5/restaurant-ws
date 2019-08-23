@@ -9,4 +9,5 @@ import lombok.*;
 @NoArgsConstructor
 public class TablesDto extends BaseDto {
     private Integer id;
+    private String status;
 }

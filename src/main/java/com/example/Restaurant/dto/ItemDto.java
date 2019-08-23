@@ -10,7 +10,6 @@ import lombok.*;
 public class ItemDto extends BaseDto{
     private Integer id;
     private String name;
-    private Double price;
     private Double cost;
     private String unit;
     private Double quantity;

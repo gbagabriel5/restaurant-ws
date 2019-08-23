@@ -21,7 +21,6 @@ public class SaleMapper implements GenericMapper<Sale, SaleDto> {
         dto.setMoneyRecievid(entity.getMoneyRecievid());
         dto.setChange(entity.getChange());
         dto.setStatus(entity.getStatus());
-        dto.setTableStatus(entity.getTableStatus());
         dto.setOut(entity.getOut());
         dto.setDescription(entity.getDescription());
         return dto;
@@ -44,7 +43,6 @@ public class SaleMapper implements GenericMapper<Sale, SaleDto> {
         entity.setMoneyRecievid(dto.getMoneyRecievid());
         entity.setChange(dto.getChange());
         entity.setStatus(dto.getStatus());
-        entity.setTableStatus(dto.getTableStatus());
         entity.setOut(dto.getOut());
         entity.setDescription(dto.getDescription());
         return entity;

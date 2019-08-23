@@ -19,9 +19,6 @@ public class Item implements BaseEntity<Integer>{
     @Column(name = "itnome")
     private String name;
 
-    @Column(name = "itpreco")
-    private Double price;
-
     @Column(name = "itcusto")
     private Double cost;
 

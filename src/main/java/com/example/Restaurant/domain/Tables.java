@@ -15,4 +15,7 @@ public class Tables implements BaseEntity<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mcod", nullable = false)
     private Integer id;
+
+    @Column(name = "mstatus")
+    private String status;
 }

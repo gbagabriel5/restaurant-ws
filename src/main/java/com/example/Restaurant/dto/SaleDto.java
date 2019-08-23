@@ -20,7 +20,6 @@ public class SaleDto extends BaseDto {
     private Double moneyRecievid;
     private Double change;
     private String status;
-    private String tableStatus;
     private Double out;
     private String description;
     private List<ItemSaleDto> itemSale;

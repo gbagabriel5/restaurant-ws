@@ -1,10 +1,12 @@
 package com.example.Restaurant.Service.impl;
 
 import com.example.Restaurant.Service.ProductService;
+import com.example.Restaurant.domain.Item;
 import com.example.Restaurant.domain.Product;
 import com.example.Restaurant.domain.ProductItem;
 import com.example.Restaurant.dto.ProductDto;
 import com.example.Restaurant.mapper.ProductMapper;
+import com.example.Restaurant.repository.ItemRepository;
 import com.example.Restaurant.repository.ProductItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
     @Autowired
     private ProductItemRepository productItemRepository;
 
+//    @Autowired
+//    private ItemRepository itemRepository;
+
     @Autowired
     private ProductFilter productFilter;
 
@@ -29,17 +34,25 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
     public void trim(Product entity) {
     }
 
-    private void saveItens(Product entity, Product productsave){
-        for (ProductItem productItem: entity.getItemproduto()) {
-            if(productsave.getControl().equals("Sim") && productsave.getQuantity()>=productsave.getMinQuantity())
+    private void saveItens(Product entity, Product productsave) {
+        for (ProductItem productItem : entity.getItemproduto()) {
+            if (productsave.getControl().equals("Sim") && productsave.getQuantity() >= productsave.getMinQuantity())
                 productsave.setStatus("OK");
-            else if(productsave.getControl().equals("Sim") && productsave.getQuantity()<productsave.getMinQuantity())
+            else if (productsave.getControl().equals("Sim") && productsave.getQuantity() < productsave.getMinQuantity())
                 productsave.setStatus("Baixo");
             else
                 productsave.setStatus("Sem Controle");
+
             productItem.setProduct(productsave);
             productItem.setItem(productItem.getItem());
             productItem.setQtde(productItem.getQtde());
+
+//            double qt = productItem.getItem().getQuantity();
+//            double itqt = productItem.getQtde();
+//            double result = qt - itqt;
+//            productItem.getItem().setQuantity(result);
+//
+//            itemRepository.save(productItem.getItem());
             productItemRepository.save(productItem);
         }
     }
@@ -47,11 +60,11 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
     @Override
     public Product add(Product entity) {
         try {
-            Product productsave =super.add(entity);
+            Product productsave = super.add(entity);
             saveItens(entity, productsave);
-            entity=productsave;
+            entity = productsave;
         } catch (Exception ex) {
-            new Exception("Não foi possivel salvar o item"+ex);
+            new Exception("Não foi possivel salvar o item" + ex);
         }
         return entity;
     }
@@ -61,17 +74,17 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
         FilterManager<Product> filterManager = new FilterManager<>(productFilter);
 
         filterManager.addParameter("name", "%" + name + "%");
-        if(direction.equals("ASC")){
+        if (direction.equals("ASC")) {
             filterManager.orderBy(orderBy).asc();
-        }else {
+        } else {
             filterManager.orderBy(orderBy).desc();
         }
 
         List<Product> productList = filterManager.findByFilter();
 
-        List<ProductDto> productDtos= new ArrayList<>();
+        List<ProductDto> productDtos = new ArrayList<>();
 
-        productList.forEach(products ->  productDtos.add(productMapper.convertToDTO(products)));
+        productList.forEach(products -> productDtos.add(productMapper.convertToDTO(products)));
         Long pageInit = pageable.getOffset();
         Long pageEnd = (pageInit + pageable.getPageSize()) > productDtos.size() ? productDtos.size() : (pageInit + pageable.getPageSize());
 

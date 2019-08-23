@@ -11,7 +11,6 @@ public class ItemMapper implements GenericMapper<Item, ItemDto> {
 
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setPrice(entity.getPrice());
         dto.setCost(entity.getCost());
         dto.setUnit(entity.getUnit());
         dto.setQuantity(entity.getQuantity());
@@ -33,7 +32,6 @@ public class ItemMapper implements GenericMapper<Item, ItemDto> {
 
         entity.setId(dto.getId());
         entity.setName(dto.getName());
-        entity.setPrice(dto.getPrice());
         entity.setCost(dto.getCost());
         entity.setUnit(dto.getUnit());
         entity.setQuantity(dto.getQuantity());

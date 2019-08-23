@@ -48,9 +48,6 @@ public class Sale implements BaseEntity<Integer> {
     @Column(name = "venstatus")
     private String status;
 
-    @Column(name = "venmstatus")
-    private String tableStatus;
-
     @Column(name = "vensaida")
     private Double out;
 
