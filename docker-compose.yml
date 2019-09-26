@@ -1,0 +1,52 @@
+
+version: '3'
+
+services:
+  resolve_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - minioserver
+    command: minioserver:9000
+    networks:
+      - dynamox-network
+
+  minioserver:
+    container_name: minioserver
+    build:
+      dockerfile: ./docker/minio/server/Dockerfile
+      context: .
+    environment:
+        MINIO_ACCESS_KEY: minio
+        MINIO_SECRET_KEY: minio123
+    volumes:
+      - ./miniodata:/data
+    ports:
+      - "9000:9000"
+    networks:
+      - dynamox-network
+
+  minioconfig:
+    container_name: minioconfig
+    build:
+      dockerfile: ./docker/minio/client/Dockerfile
+      context: .
+    environment:
+      MINIO_HOST: minioserver
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    networks:
+      - dynamox-network
+    ports:
+      - "9001:9000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://minio1:9000/minio/health/live"]
+      interval: 1m30s
+      timeout: 20s
+      retries: 3
+
+networks:
+  dynamox-network:
+    driver: bridge
+
+volumes:
+  miniodata:

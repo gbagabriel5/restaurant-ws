@@ -1,9 +1,14 @@
 package com.example.Restaurant.mapper;
 
+import com.example.Restaurant.domain.ItemSale;
 import com.example.Restaurant.domain.Sale;
-import com.example.Restaurant.dto.SaleDto;
+import com.example.Restaurant.dto.*;
+import com.example.Restaurant.dto.CustomDto.SaleCustomDto;
+import org.modelmapper.ModelMapper;
 
 public class SaleMapper implements GenericMapper<Sale, SaleDto> {
+    ModelMapper modelMapper = new ModelMapper();
+
     @Override
     public SaleDto convertToDTO(Sale entity) {
         SaleDto dto = new SaleDto();
@@ -23,6 +28,26 @@ public class SaleMapper implements GenericMapper<Sale, SaleDto> {
         dto.setStatus(entity.getStatus());
         dto.setOut(entity.getOut());
         dto.setDescription(entity.getDescription());
+
+        if(!entity.getItemSale().isEmpty()){
+            entity.getItemSale().forEach(itemSale -> {
+                ItemSaleDto itemSaleDto = new ItemSaleDto();
+
+                itemSaleDto.setId(itemSale.getId());
+
+                SaleDto sdto = new SaleDto();
+                sdto.setId(itemSale.getSale().getId());
+                itemSaleDto.setSaleDto(modelMapper.map(itemSale.getSale(), SaleDto.class));
+
+                ProductDto productDto = new ProductDto();
+                productDto.setId(itemSale.getProduct().getId());
+                itemSaleDto.setProductDto(modelMapper.map(itemSale.getProduct(), ProductDto.class));
+
+                itemSaleDto.setQuantity(itemSale.getQuantity());
+                itemSaleDto.setObs(itemSale.getObs());
+                dto.getItemSaleDtos().add(itemSaleDto);
+            });
+        }
         return dto;
     }
 
@@ -45,6 +70,25 @@ public class SaleMapper implements GenericMapper<Sale, SaleDto> {
         entity.setStatus(dto.getStatus());
         entity.setOut(dto.getOut());
         entity.setDescription(dto.getDescription());
+
+        if(!dto.getItemSaleDtos().isEmpty()){
+            dto.getItemSaleDtos().forEach(itemDto ->
+                entity.getItemSale().add(converteItemSaleToEntity(itemDto))
+            );
+        }
         return entity;
+    }
+
+    private ItemSale converteItemSaleToEntity(ItemSaleDto dto) {
+        ItemSale entity = new ItemSale();
+        entity.setId(dto.getId());
+        entity.setSale(modelMapper.map(dto.getSaleDto(), Sale.class));
+        if (dto.getProductDto() != null) {
+            entity.setProduct(new ProductMapper().convertToEntity(dto.getProductDto()));
+        }
+        entity.setQuantity(dto.getQuantity());
+        entity.setObs(dto.getObs());
+        return entity;
+
     }
 }

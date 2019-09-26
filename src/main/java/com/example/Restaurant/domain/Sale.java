@@ -54,6 +54,6 @@ public class Sale implements BaseEntity<Integer> {
     @Column(name = "vendesc")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ItemSale> product = new HashSet<>(0);
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ItemSale> itemSale = new HashSet<>(0);
 }

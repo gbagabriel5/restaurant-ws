@@ -1,6 +1,5 @@
 package com.example.Restaurant.dto;
 
-import com.example.Restaurant.dto.CustomDto.ProductCustomDto;
 import lombok.*;
 
 @Setter
@@ -12,7 +11,7 @@ public class ProductItemDto extends BaseDto {
 
     private Integer id;
 
-    private ProductCustomDto productDto;
+    private ProductDto productDto;
 
     private ItemDto itemDto;
 

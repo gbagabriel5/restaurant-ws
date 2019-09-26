@@ -2,7 +2,6 @@ package com.example.Restaurant.mapper;
 
 import com.example.Restaurant.domain.Product;
 import com.example.Restaurant.domain.ProductItem;
-import com.example.Restaurant.dto.CustomDto.ProductCustomDto;
 import com.example.Restaurant.dto.ItemDto;
 import com.example.Restaurant.dto.ProductDto;
 import com.example.Restaurant.dto.ProductItemDto;
@@ -30,23 +29,23 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
         }
 
         if(!entity.getItemproduto().isEmpty()){
-            entity.getItemproduto().forEach(productItem -> {
-                ProductItemDto productItemDto = new ProductItemDto();
+                entity.getItemproduto().forEach(productItem -> {
+                    ProductItemDto productItemDto = new ProductItemDto();
 
-                productItemDto.setId(productItem.getId());
+                    productItemDto.setId(productItem.getId());
 
-                ProductDto pdto = new ProductDto();
-                pdto.setId(productItem.getProduct().getId());
-                productItemDto.setProductDto(modelMapper.map(productItem.getProduct(), ProductCustomDto.class));
+                    ProductDto pdto = new ProductDto();
+                    pdto.setId(productItem.getProduct().getId());
+                    productItemDto.setProductDto(modelMapper.map(productItem.getProduct(), ProductDto.class));
 
-                ItemDto itemDto = new ItemDto();
-                itemDto.setId(productItem.getItem().getId());
-                productItemDto.setItemDto(modelMapper.map(productItem.getItem(), ItemDto.class));
+                    ItemDto itemDto = new ItemDto();
+                    itemDto.setId(productItem.getItem().getId());
+                    productItemDto.setItemDto(modelMapper.map(productItem.getItem(), ItemDto.class));
 
-                productItemDto.setQtde(productItem.getQtde());
+                    productItemDto.setQtde(productItem.getQtde());
 
-                dto.getProductItemDtos().add(productItemDto);
-            });
+                    dto.getProductItemDtos().add(productItemDto);
+                });
         }
         return dto;
     }

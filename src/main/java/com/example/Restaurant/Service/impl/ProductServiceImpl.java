@@ -1,12 +1,10 @@
 package com.example.Restaurant.Service.impl;
 
 import com.example.Restaurant.Service.ProductService;
-import com.example.Restaurant.domain.Item;
 import com.example.Restaurant.domain.Product;
 import com.example.Restaurant.domain.ProductItem;
 import com.example.Restaurant.dto.ProductDto;
 import com.example.Restaurant.mapper.ProductMapper;
-import com.example.Restaurant.repository.ItemRepository;
 import com.example.Restaurant.repository.ProductItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,9 +19,6 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
 
     @Autowired
     private ProductItemRepository productItemRepository;
-
-//    @Autowired
-//    private ItemRepository itemRepository;
 
     @Autowired
     private ProductFilter productFilter;
@@ -47,12 +42,6 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Integer> imp
             productItem.setItem(productItem.getItem());
             productItem.setQtde(productItem.getQtde());
 
-//            double qt = productItem.getItem().getQuantity();
-//            double itqt = productItem.getQtde();
-//            double result = qt - itqt;
-//            productItem.getItem().setQuantity(result);
-//
-//            itemRepository.save(productItem.getItem());
             productItemRepository.save(productItem);
         }
     }

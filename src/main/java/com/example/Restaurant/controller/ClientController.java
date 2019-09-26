@@ -40,34 +40,34 @@ public class ClientController implements ListRest<Client, ClientDto, Integer> {
         return clientService;
     }
 
-    @GetMapping("/getByName")
-    @ApiOperation(value = "Find Client by name")
-    public Page<ClientDto> findByName(@RequestParam(name = "page", defaultValue = "0") Integer page,
-                                    @RequestParam(name = "count", defaultValue = "25") Integer count,
-                                    @RequestParam(name = "orderby", defaultValue = "name") String orderBy,
-                                    @RequestParam(name = "direction", defaultValue = "ASC") String direction,
-                                    @RequestParam(value = "name", defaultValue = "") String name) {
-        Pageable pageable = PageRequest.of(page, count, Sort.by(orderBy));
-        return clientService.getByName(pageable, name, orderBy, direction);
-    }
+    ;@GetMapping("/getByName")
+        @ApiOperation(value = "Find Client by name")
+        public Page<ClientDto> findByName(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                @RequestParam(name = "count", defaultValue = "25") Integer count,
+                @RequestParam(name = "orderby", defaultValue = "name") String orderBy,
+                @RequestParam(name = "direction", defaultValue = "ASC") String direction,
+                @RequestParam(value = "name", defaultValue = "") String name) {
+            Pageable pageable = PageRequest.of(page, count, Sort.by(orderBy));
+            return clientService.getByName(pageable, name, orderBy, direction);
+        }
 
-    @GetMapping(value = "/{id}")
-    @ApiOperation(value = "Find Client by id")
-    public ClientDto findById(@PathVariable Integer id) {
-        return clientMapper.convertToDTO(clientService.get(id));
-    }
+        @GetMapping(value = "/{id}")
+        @ApiOperation(value = "Find Client by id")
+        public ClientDto findById(@PathVariable Integer id) {
+            return clientMapper.convertToDTO(clientService.get(id));
+        }
 
-    @PostMapping
-    @ApiOperation(value = "Create new Client")
-    public ClientDto create(@ApiParam(value = "Client", required = true) @RequestBody @Valid ClientDto clientDto) {
-        Client entity = clientMapper.convertToEntity(clientDto);
-        return clientMapper.convertToDTO(clientService.add(entity));
-    }
+        @PostMapping
+        @ApiOperation(value = "Create new Client")
+        public ClientDto create(@ApiParam(value = "Client", required = true) @RequestBody @Valid ClientDto clientDto) {
+            Client entity = clientMapper.convertToEntity(clientDto);
+            return clientMapper.convertToDTO(clientService.add(entity));
+        }
 
-    @PutMapping()
-    @ApiOperation(value = "Update Client")
-    public ClientDto update(@ApiParam(value = "Client", required = true) @RequestBody @Valid ClientDto clientDto) {
-        Client entity = clientMapper.convertToEntity(clientDto);
+        @PutMapping()
+        @ApiOperation(value = "Update Client")
+        public ClientDto update(@ApiParam(value = "Client", required = true) @RequestBody @Valid ClientDto clientDto) {
+            Client entity = clientMapper.convertToEntity(clientDto);
         return clientMapper.convertToDTO(clientService.update(entity));
     }
 

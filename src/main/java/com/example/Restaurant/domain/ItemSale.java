@@ -10,20 +10,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "itemvenda")
-public class ItemSale implements BaseEntity<Integer> {
+public class ItemSale {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "itvcod", unique = true, nullable = false)
+    @Column(name = "itvcod", nullable = false)
     private Integer id;
 
-    @Id
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "itvvencod", nullable = false)
+    @JoinColumn(name = "itvvencod")
     private Sale sale;
 
-    @Id
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "itvprocod", nullable = false)
+    @JoinColumn(name = "itvprocod")
     private Product product;
 
     @Column(name = "itvqtde")

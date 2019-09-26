@@ -1,6 +1,5 @@
 package com.example.Restaurant.dto;
 
-import com.example.Restaurant.domain.Product;
 import lombok.*;
 
 @Setter
@@ -10,7 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 public class ItemSaleDto extends BaseDto {
     private Integer id;
-    private Product product;
+    private SaleDto saleDto;
+    private ProductDto productDto;
     private Integer quantity;
     private String obs;
 }
