@@ -15,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @Api(value = "Product Controller")
@@ -42,7 +41,8 @@ public class ProductController implements ListRest<Product, ProductDto, Integer>
     }
 
     @GetMapping("/getByName")
-    @ApiOperation(value = "Find Item by name")
+    @ApiOperation(value = "Find Product by name")
+//    @Cacheable(value = "getProductsByName")
     public Page<ProductDto> findByName(@RequestParam(name = "page", defaultValue = "0") Integer page,
                                     @RequestParam(name = "count", defaultValue = "25") Integer count,
                                     @RequestParam(name = "orderby", defaultValue = "name") String orderBy,
@@ -60,13 +60,15 @@ public class ProductController implements ListRest<Product, ProductDto, Integer>
 
     @PostMapping
     @ApiOperation(value = "Create new Product")
+//    @CacheEvict(value = "getProductsByName", allEntries = true)
     public ProductDto create(@ApiParam(value = "Product", required = true) @RequestBody @Valid ProductDto productDto) {
         Product entity = productMapper.convertToEntity(productDto);
         return productMapper.convertToDTO(productService.add(entity));
     }
 
-    @PutMapping()
+    @PutMapping
     @ApiOperation(value = "Update Product")
+//    @CacheEvict(value = "getProductsByName", allEntries = true)
     public ProductDto update(@ApiParam(value = "Product", required = true) @RequestBody @Valid ProductDto productDto) {
         Product entity = productMapper.convertToEntity(productDto);
         return productMapper.convertToDTO(productService.update(entity));
@@ -74,6 +76,7 @@ public class ProductController implements ListRest<Product, ProductDto, Integer>
 
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Delete Product")
+//    @CacheEvict(value = "getProductsByName", allEntries = true)
     public void delete(@PathVariable Integer id) {
         productService.removeById(id);
     }

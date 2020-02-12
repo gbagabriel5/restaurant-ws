@@ -28,7 +28,6 @@ public class ItemServiceImpl extends GenericServiceImpl<Item,Integer> implements
     public void trim(Item entity) {
     }
 
-
     @Override
     public Item save(Item item) {
         if(item.getQuantity()>item.getMinQuantity())

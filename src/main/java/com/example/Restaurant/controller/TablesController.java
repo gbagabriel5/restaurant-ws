@@ -50,4 +50,11 @@ public class TablesController implements ListRest<Tables, TablesDto, Integer> {
         Tables entity = tableMapper.convertToEntity(tablesDto);
         return tableMapper.convertToDTO(tablesService.add(entity));
     }
+
+    @GetMapping(value = "exists/{id}")
+    @ApiOperation(value = "Check if Exists")
+    public boolean checkIfExists(@PathVariable Integer id) {
+        return tablesService.findBusyTable(id);
+    }
+
 }

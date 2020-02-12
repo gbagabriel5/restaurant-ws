@@ -47,6 +47,7 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
                     dto.getProductItemDtos().add(productItemDto);
                 });
         }
+        
         return dto;
     }
 
@@ -83,6 +84,5 @@ public class ProductMapper implements GenericMapper<Product, ProductDto> {
         }
         entity.setQtde(productItemDto.getQtde());
         return entity;
-
     }
 }
