@@ -7,7 +7,7 @@ JDK 8
 Intellij (or another IDE of your preference for backend development)
 
 Instalation
-Clone this project with git clone https://github.com/renatodotlira/fipe.git
+Clone this project with git clone https://github.com/gbagabriel5/restaurant-ws
 
 Open the project Restaurant on Intellij
 
