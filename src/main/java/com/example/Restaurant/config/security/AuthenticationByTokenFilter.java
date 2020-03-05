@@ -40,7 +40,7 @@ public class AuthenticationByTokenFilter extends OncePerRequestFilter {
     }
 
     private String recoverToken(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("authorization");
         if(token == null || token.isEmpty() || !token.startsWith("Bearer "))
             return null;
         return token.substring(7, token.length());

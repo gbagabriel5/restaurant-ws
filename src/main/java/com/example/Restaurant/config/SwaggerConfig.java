@@ -16,20 +16,14 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 import java.util.Arrays;
 
-/**
- * Configuração do Swagger para consultar a API através de um browser e para gerar API para o FRONT
- */
 @Configuration
 @EnableSwagger2
 @EnableWebMvc
 public class SwaggerConfig implements WebMvcConfigurer {
 
     private static  final String TITLE="RESTAURANT API";
-//    private static  final String DESCRIPTION="<h1>( ͡° ͜ʖ ͡°)( ͠° ͟ʖ ͡°)( ͡~ ͜ʖ ͡°)( ͡ʘ ͜ʖ ͡ʘ)( ͡o ͜ʖ ͡o)(° ͜ʖ °)( ‾ʖ̫‾)( ಠ ͜ʖಠ)( ͡° ʖ̯ ͡°)( ͡ಥ ͜ʖ ͡ಥ)༼ ͡° ͜ʖ ͡° ༽(·̿Ĺ̯·̿ ̿)</h1>";
-//    private static  final String VERSION="3.0.0";
 
     @Bean
     public Docket api() {
@@ -41,19 +35,17 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .apiInfo(apiInfo())
                 .ignoredParameterTypes(User.class)
                 .globalOperationParameters(
-                        Arrays.asList(
-                                new ParameterBuilder()
-                                        .name("Authorization")
-                                        .description("Header para Token JWT")
-                                        .modelRef(new ModelRef("string"))
-                                        .parameterType("header")
-                                        .required(false)
-                                        .build()));
+                        Arrays.asList(new ParameterBuilder()
+                              .name("authorization")
+                              .description("Header para Token JWT")
+                              .modelRef(new ModelRef("string"))
+                              .parameterType("header")
+                              .required(false)
+                              .build()));
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
 
@@ -69,7 +61,6 @@ public class SwaggerConfig implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         ApiInfo apiInfos = new ApiInfoBuilder()
                 .title(TITLE)
-//                .description(DESCRIPTION)
                 .build();
         return apiInfos;
     }

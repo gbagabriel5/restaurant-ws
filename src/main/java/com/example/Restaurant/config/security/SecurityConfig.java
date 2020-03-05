@@ -17,8 +17,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -45,16 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Configurações de autorização
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-//                .and().formLogin() - Para usar formulario de login
-                .anyRequest().authenticated()
-                .and().csrf().disable()
-
+//          .and().formLogin() - Para usar formulario de login
+                .anyRequest().authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationByTokenFilter(tokenService, repository), UsernamePasswordAuthenticationFilter.class);
-
     }
 
     //Configurações de recursos estaticos(js,css,imagens,etc.)
@@ -67,3 +64,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        System.out.println(new BCryptPasswordEncoder().encode("123456"));
 //    }
 }
+
